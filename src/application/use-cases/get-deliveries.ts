@@ -8,6 +8,7 @@ export class GetDeliveries {
 
     async execute(userId: string): Promise<Array<Delivery>> {
         const allDelivery = await this.deliveryRepository.findAll();
+        const deliveryByUser = allDelivery.filter(delivery => delivery.userId === userId);
         return allDelivery;
     }
 }

@@ -3,6 +3,7 @@ export interface DeliveryProps {
     customerName: string
     deliveryAddress: string
     deliveryDate: Date
+    userId: string
 }
 
 export class Delivery {
@@ -12,4 +13,5 @@ export class Delivery {
   get customerName(): string { return this.props.customerName; }
   get deliveryAddress(): string { return this.props.deliveryAddress; }
   get deliveryDate(): Date { return this.props.deliveryDate; }
+  get userId(): string { return this.props.userId; }
 }

@@ -17,6 +17,7 @@ export class RepositoryData implements DeliveryRepository {
             customerName: item.customerName,
             deliveryAddress: item.deliveryAddress,
             deliveryDate: item.deliveryDate,
+            userId: item.userId
         }
     }) as Array<Delivery>
 

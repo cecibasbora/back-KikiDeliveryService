@@ -33,7 +33,8 @@ describe('DeliveryController', () => {
         id: '0001',
         customerName: 'Ursula',
         deliveryAddress:'Rua da floresta, 231',
-        deliveryDate: new Date()
+        deliveryDate: new Date(),
+        userId: 'A82YDBO'
       });
       
       mockRequest = { body: testDelivery };
@@ -54,7 +55,8 @@ describe('DeliveryController', () => {
           id: '0003',
           customerName: 'Jiji',
           deliveryAddress:'Rua da padaria, 21',
-          deliveryDate: new Date()
+          deliveryDate: new Date(),
+          userId: 'A882DBO'
         })
       ];
       
