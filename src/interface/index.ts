@@ -13,7 +13,7 @@ app.use(cors());
 const { deliveryController } = configureDependencies();
 
 app.post('/', (req, res) => deliveryController.create(req, res));
-app.get('/', (req, res) => deliveryController.getAll(req, res));
+app.get('/entregas', (req, res) => deliveryController.getAll(req, res));
 
 if (require.main === module) {
   const PORT = process.env.PORT || 3333;
