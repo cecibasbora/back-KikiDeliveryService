@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { Request, Response } from 'express';
-import { DeliveryController } from './deliverycontroller';
-import { Delivery } from '../entities/delivery';
+import { DeliveryController } from '../deliverycontroller';
+import { Delivery } from '../../entities/delivery';
 
 describe('DeliveryController', () => {
   let controller: DeliveryController;

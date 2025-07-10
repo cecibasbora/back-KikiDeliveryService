@@ -4,7 +4,7 @@ const DeliverySchema = new mongoose.Schema({
   customerName: { type: String, required: true },
   deliveryAddress: { type: String, required: true },
   deliveryDate: { type: Date, required: true },
-  userId: { type: String, required: false },
+  userId: { type: String, required: true },
 });
 
 export const DeliveryModel = mongoose.model('Delivery', DeliverySchema);
