@@ -49,24 +49,34 @@ describe('DeliveryController', () => {
   });
 
   describe('getAll()', () => {
-    it('should return deliveries for a user', async () => {
+    it('should return deliveries for a user from query params', async () => {
       const testDeliveries = [
         new Delivery({
           id: '0003',
           customerName: 'Jiji',
-          deliveryAddress:'Rua da padaria, 21',
+          deliveryAddress: 'Rua da padaria, 21',
           deliveryDate: new Date(),
-          userId: 'A882DBO'
+          userId: '123'
         })
       ];
       
-      mockRequest = { params: { userId: '123' } };
+      mockRequest = { query: { userId: '123' } };
       mockGetDeliveries.execute.mockResolvedValue(testDeliveries);
 
       await controller.getAll(mockRequest as Request, mockResponse as Response);
 
       expect(mockGetDeliveries.execute).toHaveBeenCalledWith('123');
       expect(mockResponse.json).toHaveBeenCalledWith(testDeliveries);
+    });
+
+    it('should handle missing userId parameter', async () => {
+      mockRequest = { query: {} };
+      mockGetDeliveries.execute.mockResolvedValue([]);
+
+      await controller.getAll(mockRequest as Request, mockResponse as Response);
+
+      expect(mockGetDeliveries.execute).toHaveBeenCalledWith(undefined);
+      expect(mockResponse.json).toHaveBeenCalledWith([]);
     });
   });
 });

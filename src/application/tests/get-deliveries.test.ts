@@ -14,8 +14,13 @@ describe('GetDeliveries', () => {
       userId
     });
 
-  it('returns all deliveries from repository', async () => {
-    const testDeliveries = [mockDelivery('user-1'), mockDelivery('user-2')];
+  it('returns filtered deliveries for specific user', async () => {
+    const testDeliveries = [
+      mockDelivery('user-1'),
+      mockDelivery('user-2'),
+      mockDelivery('user-1')
+    ];
+    
     const mockRepo: DeliveryRepository = {
       findAll: vi.fn().mockResolvedValue(testDeliveries),
       save: vi.fn()
@@ -23,8 +28,27 @@ describe('GetDeliveries', () => {
 
     const result = await new GetDeliveries(mockRepo).execute('user-1');
     
-    expect(result).toEqual(testDeliveries);
+    expect(result).toEqual([
+      testDeliveries[0],
+      testDeliveries[2]
+    ]);
     expect(mockRepo.findAll).toHaveBeenCalledOnce();
+  });
+
+  it('returns empty array when no deliveries exist for user', async () => {
+    const testDeliveries = [
+      mockDelivery('user-2'),
+      mockDelivery('user-3')
+    ];
+    
+    const mockRepo: DeliveryRepository = {
+      findAll: vi.fn().mockResolvedValue(testDeliveries),
+      save: vi.fn()
+    };
+
+    const result = await new GetDeliveries(mockRepo).execute('user-1');
+    
+    expect(result).toEqual([]);
   });
 
   it('handles empty repository case', async () => {

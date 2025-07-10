@@ -22,3 +22,7 @@ export class DeliveryController {
     res.json(delivery);
   }
 }
+
+  //Pesquisar melhor prática para enviar o userID, será que pela query?
+    //Qual melhor prática para enviar requisição de usuário!!!!
+    //O userId pode ser um dado sensível, é importante considerar;
