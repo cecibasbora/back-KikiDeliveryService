@@ -1,4 +1,7 @@
 {
+  "name": "kiki-delivery-service-api",
+  "version":"1.0.0",
+  "main":"index.ts",
   "dependencies": {
     "@types/express": "^5.0.0",
     "cors": "^2.8.5",
