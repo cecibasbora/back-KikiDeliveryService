@@ -17,8 +17,7 @@ app.get('/entregas', (req, res) => deliveryController.getAll(req, res));
 
 if (require.main === module) {
   const PORT = process.env.PORT || 8080;
-  const server = app.listen(PORT, () => {
+  app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
-    main().catch(err => console.error('DB connection error:', err));
-  });
+  })
 }
