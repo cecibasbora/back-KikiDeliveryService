@@ -17,7 +17,7 @@ export class DeliveryController {
   }
 
   async getAll(req: Request, res: Response) {
-    const userId = req.query.userId as string;
+    const userId = req.params.userId;
     const delivery = await this.getDeliveries.execute(userId);
     res.json(delivery);
   }
