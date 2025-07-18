@@ -7,6 +7,7 @@ describe('DeliveryController', () => {
   let controller: DeliveryController;
   let mockCreateDelivery: any;
   let mockGetDeliveries: any;
+  let mockDeleteDelivery: any;
   let mockRequest: Partial<Request>;
   let mockResponse: Partial<Response>;
 
@@ -19,12 +20,16 @@ describe('DeliveryController', () => {
       execute: vi.fn()
     };
 
+    mockDeleteDelivery = {
+      execute: vi.fn()
+    }
+
     mockResponse = {
       status: vi.fn().mockReturnThis(),
       json: vi.fn()
     };
 
-    controller = new DeliveryController(mockCreateDelivery, mockGetDeliveries);
+    controller = new DeliveryController(mockCreateDelivery, mockGetDeliveries, mockDeleteDelivery);
   });
 
   describe('create()', () => {
@@ -69,4 +74,16 @@ describe('DeliveryController', () => {
     expect(mockResponse.json).toHaveBeenCalledWith(testDeliveries);
     });
   });
+
+  describe('deleteDelivery()', () => {
+    it('should delete a delivery and return 204 status', async () => {
+      const deliveryId = 'delivery-123';
+      mockRequest = { params: { id: deliveryId } };
+      
+      await controller.delete(mockRequest as Request, mockResponse as Response);
+
+      expect(mockDeleteDelivery.execute).toHaveBeenCalledWith(deliveryId);
+      expect(mockResponse.status).toHaveBeenCalledWith(204);
+    });
+  });  
 });

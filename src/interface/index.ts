@@ -14,6 +14,7 @@ const { deliveryController } = configureDependencies();
 
 app.post('/', (req, res) => deliveryController.create(req, res));
 app.get('/entregas/:userId', (req, res) => deliveryController.getAll(req, res));
+app.delete("/entregas/:id", (req, res) => deliveryController.delete(req, res))
 
 if (require.main === module) {
   const PORT = process.env.PORT || 8080;

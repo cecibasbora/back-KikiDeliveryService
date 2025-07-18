@@ -4,6 +4,7 @@ export interface DeliveryProps {
     deliveryAddress: string
     deliveryDate: Date
     userId: string
+    isDeleted: boolean 
 }
 
 export class Delivery {
@@ -14,4 +15,5 @@ export class Delivery {
   get deliveryAddress(): string { return this.props.deliveryAddress; }
   get deliveryDate(): Date { return this.props.deliveryDate; }
   get userId(): string { return this.props.userId; }
+  get isDeleted(): boolean {return this.props.isDeleted }
 }

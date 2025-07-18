@@ -3,7 +3,6 @@ import { Delivery } from '../../entities/delivery';
 import type { DeliveryRepository } from '../repositories/delivery-repository';
 
 describe('DeliveryRepository', () => {
-
   const createTestDelivery = () => new Delivery({
     id: 'delivery-1',
     customerName: 'John Doe',
@@ -17,6 +16,7 @@ describe('DeliveryRepository', () => {
     const repository: DeliveryRepository = {
       save: vi.fn().mockResolvedValue(undefined),
       findAll: vi.fn().mockResolvedValue([]),
+      delete: vi.fn().mockResolvedValue(undefined),
     };
 
     await repository.save(testDelivery);
@@ -28,11 +28,24 @@ describe('DeliveryRepository', () => {
     const repository: DeliveryRepository = {
       save: vi.fn(),
       findAll: vi.fn().mockResolvedValue([testDelivery]),
+      delete: vi.fn().mockResolvedValue(undefined),
     };
 
     const result = await repository.findAll();
     expect(result).toEqual([testDelivery]);
     expect(result[0].id).toBe('delivery-1');
     expect(result[0].customerName).toBe('John Doe');
+  });
+
+  it('should delete a delivery', async () => {
+    const testDeliveryId = 'delivery-1';
+    const repository: DeliveryRepository = {
+      save: vi.fn(),
+      findAll: vi.fn(),
+      delete: vi.fn().mockResolvedValue(undefined),
+    };
+
+    await repository.delete(testDeliveryId);
+    expect(repository.delete).toHaveBeenCalledWith(testDeliveryId);
   });
 });

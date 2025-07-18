@@ -1,6 +1,7 @@
 import { DeliveryRepository } from '../application/repositories/delivery-repository';
 import { Delivery } from '../entities/delivery';
 import { DeliveryModel } from './model';
+import mongoose from 'mongoose';
 
 export class RepositoryData implements DeliveryRepository {
     async save (delivery: Delivery): Promise<void> {
@@ -9,7 +10,7 @@ export class RepositoryData implements DeliveryRepository {
     }
 
     async findAll (): Promise<Array<Delivery>> {
-    const delivery = await DeliveryModel.find();
+    const delivery = await DeliveryModel.find({ isDeleted: false });
 
     const translatedDelivery = delivery.map(item => {
         return {
@@ -17,10 +18,19 @@ export class RepositoryData implements DeliveryRepository {
             customerName: item.customerName,
             deliveryAddress: item.deliveryAddress,
             deliveryDate: item.deliveryDate,
-            userId: item.userId
+            userId: item.userId,
         }
     }) as Array<Delivery>
 
     return translatedDelivery;
     }
+
+    async delete (id: string): Promise <void> {
+         const result = await DeliveryModel.findByIdAndUpdate(
+            new mongoose.Types.ObjectId(id),
+            { 
+                $set: {isDeleted: true}
+            }
+        );
+    } 
 }
