@@ -3,12 +3,13 @@ import { Delivery } from '../../entities/delivery';
 import type { DeliveryRepository } from '../repositories/delivery-repository';
 
 describe('DeliveryRepository', () => {
-  const createTestDelivery = () => new Delivery({
+  const createTestDelivery = (isDeleted = false) => new Delivery({
     id: 'delivery-1',
     customerName: 'John Doe',
     deliveryAddress: '123 Main St',
     deliveryDate: new Date(),
-    userId: 'user-123'
+    userId: 'user-123',
+    isDeleted
   });
 
   it('should save a delivery', async () => {

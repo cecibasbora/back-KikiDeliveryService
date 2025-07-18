@@ -7,12 +7,16 @@ describe('CreateDelivery', () => {
     customerName: 'John Doe',
     deliveryAddress: '123 Main St',
     deliveryDate: new Date(),
-    userId: 'user-123'
+    userId: 'user-123',
+    isDeleted: false
   };
 
   const createMockRepository = () => ({
     save: vi.fn(),
-    findAll: vi.fn().mockResolvedValue([]) 
+    findAll: vi.fn().mockResolvedValue([]),
+    delete: vi.fn(),
+    findDeleted: vi.fn(),
+    restore: vi.fn()
   });
 
   it('should create and save a delivery with complete params', () => {
