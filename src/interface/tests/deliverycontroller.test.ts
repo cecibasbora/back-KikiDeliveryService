@@ -37,9 +37,10 @@ describe('DeliveryController', () => {
       const testDelivery = new Delivery({
         id: '0001',
         customerName: 'Ursula',
-        deliveryAddress:'Rua da floresta, 231',
+        deliveryAddress: 'Rua da floresta, 231',
         deliveryDate: new Date(),
-        userId: 'A82YDBO'
+        userId: 'A82YDBO',
+        isDeleted: false
       });
       
       mockRequest = { body: testDelivery };
@@ -56,22 +57,23 @@ describe('DeliveryController', () => {
   describe('getAll()', () => {
     it('should return deliveries for a user from route params', async () => {
     const testDeliveries = [
-      new Delivery({
-        id: '0004',
-        customerName: 'Kiki',
-        deliveryAddress: 'Rua da bruxaria, 13',
-        deliveryDate: new Date(),
-        userId: '456'
-      })
-    ];
+       new Delivery({
+          id: '0005',
+          customerName: 'Deleted',
+          deliveryAddress: 'Rua deletada, 99',
+          deliveryDate: new Date(),
+          userId: '456',
+          isDeleted: false
+        })
+      ];
     
-    mockRequest = { params: { userId: '456' } };
-    mockGetDeliveries.execute.mockResolvedValue(testDeliveries);
+      mockRequest = { params: { userId: '456' } };
+      mockGetDeliveries.execute.mockResolvedValue(testDeliveries.filter(d => !d.isDeleted));
 
-    await controller.getAll(mockRequest as Request, mockResponse as Response);
+      await controller.getAll(mockRequest as Request, mockResponse as Response);
 
-    expect(mockGetDeliveries.execute).toHaveBeenCalledWith('456');
-    expect(mockResponse.json).toHaveBeenCalledWith(testDeliveries);
+      expect(mockGetDeliveries.execute).toHaveBeenCalledWith('456');
+      expect(mockResponse.json).toHaveBeenCalledWith([testDeliveries[0]]);
     });
   });
 
