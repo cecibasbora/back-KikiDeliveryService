@@ -33,4 +33,33 @@ export class RepositoryData implements DeliveryRepository {
             }
         );
     } 
+
+    async update(id: string, delivery: Partial<Delivery>): Promise<Delivery> {
+    const updatedDelivery = await DeliveryModel.findByIdAndUpdate(
+        new mongoose.Types.ObjectId(id),
+        { 
+            $set: {
+                customerName: delivery.customerName,
+                deliveryAddress: delivery.deliveryAddress,
+                deliveryDate: delivery.deliveryDate,
+                userId: delivery.userId
+            }
+        },
+        { new: true }
+    );
+
+    if (!updatedDelivery) {
+        throw new Error('Delivery not found');
+    }
+
+    return new Delivery({
+        id: updatedDelivery._id.toString(),
+        customerName: updatedDelivery.customerName,
+        deliveryAddress: updatedDelivery.deliveryAddress,
+        deliveryDate: updatedDelivery.deliveryDate,
+        userId: updatedDelivery.userId,
+        isDeleted: false,
+    });
+}
+
 }

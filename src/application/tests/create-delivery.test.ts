@@ -15,8 +15,7 @@ describe('CreateDelivery', () => {
     save: vi.fn(),
     findAll: vi.fn().mockResolvedValue([]),
     delete: vi.fn(),
-    findDeleted: vi.fn(),
-    restore: vi.fn()
+    update: vi.fn(),
   });
 
   it('should create and save a delivery with complete params', () => {

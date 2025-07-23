@@ -8,6 +8,7 @@ describe('DeliveryController', () => {
   let mockCreateDelivery: any;
   let mockGetDeliveries: any;
   let mockDeleteDelivery: any;
+  let mockUpdateDelivery: any;
   let mockRequest: Partial<Request>;
   let mockResponse: Partial<Response>;
 
@@ -24,12 +25,16 @@ describe('DeliveryController', () => {
       execute: vi.fn()
     }
 
+    mockUpdateDelivery = {
+      execute: vi.fn()
+    }
+
     mockResponse = {
       status: vi.fn().mockReturnThis(),
       json: vi.fn()
     };
 
-    controller = new DeliveryController(mockCreateDelivery, mockGetDeliveries, mockDeleteDelivery);
+    controller = new DeliveryController(mockCreateDelivery, mockGetDeliveries, mockDeleteDelivery, mockUpdateDelivery);
   });
 
   describe('create()', () => {

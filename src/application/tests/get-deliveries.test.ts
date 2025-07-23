@@ -24,7 +24,8 @@ describe('GetDeliveries', () => {
     const mockRepo: DeliveryRepository = {
       findAll: vi.fn().mockResolvedValue(testDeliveries),
       save: vi.fn(),
-      delete: vi.fn()
+      delete: vi.fn(),
+      update: vi.fn(),
     };
 
     const result = await new GetDeliveries(mockRepo).execute('user-1');
@@ -45,7 +46,8 @@ describe('GetDeliveries', () => {
     const mockRepo: DeliveryRepository = {
       findAll: vi.fn().mockResolvedValue(testDeliveries),
       save: vi.fn(),
-      delete: vi.fn()
+      delete: vi.fn(),
+      update: vi.fn(),
     };
 
     const result = await new GetDeliveries(mockRepo).execute('user-1');
@@ -57,7 +59,8 @@ describe('GetDeliveries', () => {
     const mockRepo: DeliveryRepository = {
       findAll: vi.fn().mockResolvedValue([]),
       save: vi.fn(),
-      delete: vi.fn()
+      delete: vi.fn(),
+      update: vi.fn(),
     };
 
     const result = await new GetDeliveries(mockRepo).execute('any-user');

@@ -18,6 +18,7 @@ describe('DeliveryRepository', () => {
       save: vi.fn().mockResolvedValue(undefined),
       findAll: vi.fn().mockResolvedValue([]),
       delete: vi.fn().mockResolvedValue(undefined),
+      update: vi.fn().mockResolvedValue(undefined),
     };
 
     await repository.save(testDelivery);
@@ -30,6 +31,7 @@ describe('DeliveryRepository', () => {
       save: vi.fn(),
       findAll: vi.fn().mockResolvedValue([testDelivery]),
       delete: vi.fn().mockResolvedValue(undefined),
+      update: vi.fn().mockResolvedValue(undefined),
     };
 
     const result = await repository.findAll();
@@ -44,6 +46,7 @@ describe('DeliveryRepository', () => {
       save: vi.fn(),
       findAll: vi.fn(),
       delete: vi.fn().mockResolvedValue(undefined),
+      update: vi.fn(),
     };
 
     await repository.delete(testDeliveryId);

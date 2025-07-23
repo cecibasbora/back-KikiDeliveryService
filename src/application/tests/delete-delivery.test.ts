@@ -9,6 +9,7 @@ describe('DeleteDeliveryUseCase', () => {
       save: vi.fn(),
       findAll: vi.fn(),
       delete: vi.fn().mockResolvedValue(undefined),
+      update: vi.fn(),
     };
 
     const useCase = new DeleteDelivery(mockRepository);
