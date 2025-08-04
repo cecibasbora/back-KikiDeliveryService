@@ -3,6 +3,7 @@ import { Delivery } from '../entities/delivery';
 import { DeliveryModel } from './model';
 import mongoose from 'mongoose';
 
+
 export class RepositoryData implements DeliveryRepository {
     async save (delivery: Delivery): Promise<void> {
         const newDelivery = new DeliveryModel(delivery)
@@ -31,6 +32,7 @@ export class RepositoryData implements DeliveryRepository {
             { 
                 $set: {isDeleted: true}
             }
+            
         );
     } 
 
