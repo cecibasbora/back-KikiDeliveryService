@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
       - name: Deploy to production
-        uses: cecibasbora/back-KikiDeliveryService
+        uses: cecibasbora/back-KikiDeliveryService/actions/checkout@v3
         with:
           service-id: ${{ secrets.SERVICE_ID }} 
           api-key: ${{ secrets.RENDER_API_KEY }}
